@@ -7,12 +7,12 @@
     "node": "8.7.0"
   },
   "scripts": {
-    "start": "node backend/server.js",
-    "server": "nodemon backend/server.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend&& npm run build --prefix frontend",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "heroku-postbuild": " NPM_CONFIG_PRODUCTION=false npm install --prefix frontend&& npm run build --prefix frontend",
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "data:import": "node backend/seederScript.js"
+    "data:import": "node seederScript.js"
   },
   "keywords": [],
   "author": "",
