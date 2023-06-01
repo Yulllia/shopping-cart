@@ -2,8 +2,10 @@
   "name": "shopping-cart",
   "version": "1.0.0",
   "description": "",
-  "node": "8.7.0",
   "main": "server.js",
+  "engines": {
+    "node": "8.7.0"
+  },
   "scripts": {
     "start": "node backend/server.js",
     "server": "nodemon backend/server.js",
