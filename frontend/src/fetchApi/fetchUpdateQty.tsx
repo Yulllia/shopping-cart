@@ -1,7 +1,7 @@
 export async function fetchUpdateQty(productId: string | undefined, qty: number) {
     try {
       // Send the request to the backend
-      const response = await fetch(`${process.env.REACT_APP_API_URI}/api/products/update-cart`, {
+      const response = await fetch(`/api/products/update-cart`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

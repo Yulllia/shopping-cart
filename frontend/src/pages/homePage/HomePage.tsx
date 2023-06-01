@@ -17,7 +17,6 @@ const HomePage = () => {
   const searchShop = useRecoilValue(selectedShopState);
   
 
-
   useEffect(() => {
     setLoading(true);
     const fetchData = async () => {
