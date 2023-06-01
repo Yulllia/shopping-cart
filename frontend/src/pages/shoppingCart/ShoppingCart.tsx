@@ -14,7 +14,6 @@ import { Spin, notification } from "antd";
 import { fetchSaveOrder } from "../../fetchApi/fetchSaveOrder";
 import GoogleMaps from "../../components/googleMaps/GoogleMaps";
 import { useJsApiLoader } from "@react-google-maps/api";
-import { loadavg } from "os";
 
 const API = process.env.REACT_APP_API_KEY;
 
