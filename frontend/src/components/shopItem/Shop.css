@@ -1,0 +1,28 @@
+.shop {
+    padding: 15px 25px;
+    border: 1px solid black;
+    align-items: center;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+.shop:hover {
+    color: #6d646a;
+    background-color: #dedede;
+    cursor: pointer;
+}
+.shop:active {
+    background-color: grey;
+}
+
+.shop > .shop_name {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.shop.disabled {
+    opacity: 0.5; 
+    background-color: #afa9ad;
+    pointer-events: none; 
+  }
+
+  
