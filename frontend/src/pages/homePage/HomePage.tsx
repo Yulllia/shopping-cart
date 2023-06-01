@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import Card from "../../components/card/Card";
-import {
-  fetchProducts,
-} from "../../fetchApi/fetchProducts";
+import { fetchProducts } from "../../fetchApi/fetchProducts";
 import { fetchShops } from "../../fetchApi/fetchShops";
 import { ICard, Products } from "../../interfaces/interfaces";
 import "./HomePage.css";
@@ -15,13 +13,12 @@ const HomePage = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [products, setProducts] = useState<Products>();
   const searchShop = useRecoilValue(selectedShopState);
-  
 
   useEffect(() => {
     setLoading(true);
     const fetchData = async () => {
       try {
-        const name = localStorage.getItem('selectedShopName');
+        const name = localStorage.getItem("selectedShopName");
         const productsDataPromise = await fetchProducts(name ?? searchShop);
         const shopsDataPromise = await fetchShops();
 
@@ -33,15 +30,22 @@ const HomePage = () => {
           products: productsData,
           shops: shopsData,
         });
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching shop data:", error);
-        setLoading(false);
       }
+      setLoading(false);
     };
 
     fetchData();
   }, [searchShop]);
+
+  if (loading) {
+    return (
+      <Spin tip="Loading" size="small">
+        <div className="content" />
+      </Spin>
+    );
+  }
 
   return (
     <div className="homescreen">
@@ -51,12 +55,6 @@ const HomePage = () => {
           <Shop key={index} name={shop} />
         ))}
       </div>
-
-      {loading ? (
-        <Spin tip="Loading" size="small">
-          <div className="content" />
-        </Spin>
-      ) : (
         <>
           <div className="homescreen__products">
             {products?.products.map((product: ICard) => (
@@ -73,7 +71,6 @@ const HomePage = () => {
             ))}
           </div>
         </>
-      )}
     </div>
   );
 };

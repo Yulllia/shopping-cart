@@ -10,16 +10,18 @@ import { countCartItem } from "../../recoils/atom/countCartItem";
 import UserPersonaInfo from "../../components/userInfo/UserPersonaInfo";
 import { userInformationState } from "../../recoils/atom/userInformation";
 import { useForm } from "antd/es/form/Form";
-import { notification } from "antd";
+import { Spin, notification } from "antd";
 import { fetchSaveOrder } from "../../fetchApi/fetchSaveOrder";
 import GoogleMaps from "../../components/googleMaps/GoogleMaps";
 import { useJsApiLoader } from "@react-google-maps/api";
+import { loadavg } from "os";
 
 const API = process.env.REACT_APP_API_KEY;
 
 const ShoppingCart = () => {
   const [shopping, setShopping] = useState<Array<ICard>>([]);
   const countCart = useRecoilValue(countCartItem);
+  const [loading, setLoading] = useState<boolean>(false);
   const deletedCart = useRecoilValue(deletedCartItem);
   const userInfo = useRecoilValue(userInformationState);
   const [form] = useForm();
@@ -33,6 +35,7 @@ const ShoppingCart = () => {
   });
 
   useEffect(() => {
+    setLoading(true);
     const getCarts = async () => {
       getCartSubTotal();
       try {
@@ -41,6 +44,7 @@ const ShoppingCart = () => {
       } catch (error) {
         console.error("Error fetching shop data:", error);
       }
+      setLoading(false);
     };
     getCarts();
   }, [countCart, deletedCart]);
@@ -99,6 +103,14 @@ const ShoppingCart = () => {
     }
   };
 
+  if (loading) {
+    return (
+      <Spin tip="Loading" size="small">
+        <div className="content" />
+      </Spin>
+    );
+  }
+
   return (
     <div className="cart__block">
       <h2>Shopping Cart</h2>
@@ -106,10 +118,7 @@ const ShoppingCart = () => {
       <div className="cartscreen">
         <div className="cart_user_block">
           {isLoaded ? (
-            <GoogleMaps
-              selected={selected}
-              setAddress={setAddress}
-            />
+            <GoogleMaps selected={selected} setAddress={setAddress} />
           ) : (
             <div>Loading...</div>
           )}
