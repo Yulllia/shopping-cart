@@ -1,6 +1,6 @@
 export async function fetchProducts(name:string) {
     try {
-      const response = await fetch(`http://localhost:5000/api/products/${name}`);
+      const response = await fetch(`${process.env.REACT_APP_API_URI}/api/products/${name}`);
       const data = await response.json();
       return data;
     } catch (error) {

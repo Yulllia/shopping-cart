@@ -3,7 +3,7 @@ import { Order } from "../interfaces/interfaces";
 export async function fetchSaveOrder(order:Order) {
     try {
       // Send the request to the backend
-      const response = await fetch("http://localhost:5000/api/orders", {
+      const response = await fetch(`${process.env.REACT_APP_API_URI}/api/orders`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,7 +1,7 @@
 export async function fetchAddToCard(productId: string | undefined) {
   try {
     // Send the request to the backend
-    const response = await fetch("http://localhost:5000/api/products/add-to-cart", {
+    const response = await fetch(`${process.env.REACT_APP_API_URI}/api/products/add-to-cart`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
